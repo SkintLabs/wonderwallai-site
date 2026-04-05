@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://wonderwallai.skintlabs.ai/privacy.html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - WonderwallAi by Skint Labs</title>
+    <meta name="description" content="Privacy policy for WonderwallAi, the AI firewall SDK and hosted API by Skint Labs.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0c0b0a;
+            --bg-subtle: #0f1218;
+            --bg-card: rgba(255, 255, 255, 0.04);
+            --border: rgba(231, 111, 81, 0.2);
+            --border-solid: #1e2530;
+            --text: #c8cdd6;
+            --text-bright: #ede8e0;
+            --text-muted: #6b7585;
+            --accent-orange: #e76f51;
+            --accent-gold: #e9c46a;
+            --gradient: linear-gradient(135deg, #e76f51 0%, #f4a261 50%, #e9c46a 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: var(--accent-orange); text-decoration: none; transition: color 0.2s; }
+        a:hover { color: var(--accent-gold); }
+
+        /* NAV */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 0 32px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(12, 11, 10, 0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-solid);
+        }
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .nav-brand-text {
+            font-family: 'Noto Serif', Georgia, serif;
+            font-weight: 900;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-back {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s;
+            text-decoration: none;
+        }
+        .nav-back:hover { color: var(--text-bright); }
+        .nav-back svg { width: 14px; height: 14px; }
+
+        /* HERO */
+        .hero {
+            padding: 120px 32px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px; height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(231, 111, 81, 0.07) 0%, transparent 70%);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        .hero-eyebrow {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--accent-orange);
+            margin-bottom: 20px;
+            padding: 6px 16px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+        }
+        .hero-title {
+            font-family: 'Noto Serif', Georgia, serif;
+            font-weight: 900;
+            font-size: clamp(2.4rem, 6vw, 4rem);
+            color: var(--text-bright);
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* CONTENT */
+        .content {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+        .section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 36px 40px;
+            margin-bottom: 20px;
+        }
+        .section-heading {
+            font-family: 'Noto Serif', Georgia, serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-heading::before {
+            content: '';
+            display: block;
+            width: 3px;
+            height: 20px;
+            background: var(--gradient);
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+        .section p {
+            margin-bottom: 12px;
+            font-size: 0.96rem;
+            line-height: 1.75;
+        }
+        .section p:last-child { margin-bottom: 0; }
+        .section ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 4px;
+        }
+        .section ul li {
+            padding: 5px 0;
+            font-size: 0.96rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .section ul li::before {
+            content: '-';
+            color: var(--accent-orange);
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .highlight {
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border-solid);
+            padding: 36px 32px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+        footer a { color: var(--text-muted); }
+        footer a:hover { color: var(--text-bright); }
+        .footer-inner {
+            max-width: 780px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer-brand {
+            font-family: 'Noto Serif', Georgia, serif;
+            font-weight: 900;
+            font-size: 0.95rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .nav { padding: 0 20px; }
+            .hero { padding: 100px 20px 48px; }
+            .section { padding: 24px 20px; }
+            .content { padding: 0 16px 60px; }
+            footer { padding: 28px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav class="nav">
+        <a href="https://wonderwallai.skintlabs.ai" class="nav-brand">
+            <span class="nav-brand-text">WonderwallAi</span>
+        </a>
+        <a href="https://wonderwallai.skintlabs.ai" class="nav-back">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 12L6 8l4-4"/>
+            </svg>
+            Back to wonderwallai.skintlabs.ai
+        </a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <span class="hero-eyebrow">Legal</span>
+        <h1 class="hero-title">Privacy Policy</h1>
+        <p class="hero-subtitle">Effective March 2026 &nbsp;·&nbsp; Skint Labs, Melbourne, Australia</p>
+    </section>
+
+    <!-- CONTENT -->
+    <main class="content">
+
+        <div class="section">
+            <h2 class="section-heading">Overview</h2>
+            <p>This Privacy Policy describes how Skint Labs ("<span class="highlight">we</span>", "<span class="highlight">us</span>", or "<span class="highlight">our</span>") collects, uses, and handles data when developers and businesses use WonderwallAi, our AI firewall SDK and hosted API. WonderwallAi exists to protect AI applications from prompt injection, data leaks, and off-topic abuse. We apply the same commitment to privacy to our own product.</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-heading">Open Source SDK</h2>
+            <p>The WonderwallAi SDK is <span class="highlight">fully open source</span> (MIT licensed) and available on <a href="https://github.com/SkintLabs/WonderwallAi" target="_blank" rel="noopener">GitHub</a> and PyPI. When you use the SDK in local mode, all scanning and filtering runs entirely on your own infrastructure. <span class="highlight">No data leaves your environment.</span> Skint Labs receives no telemetry, usage data, or content from SDK-only deployments.</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-heading">Hosted API Data Collection</h2>
+            <p>When you use the WonderwallAi hosted API (wonderwallai-production.up.railway.app), we process the following data to provide the service:</p>
+            <ul>
+                <li><strong>Request content:</strong> the text submitted for scanning (user messages, LLM prompts, or responses) is processed in memory to perform threat detection. This content is not stored persistently after the scan is complete.</li>
+                <li><strong>API key and account identifiers:</strong> used to authenticate requests and enforce rate limits.</li>
+                <li><strong>Request metadata:</strong> timestamps, scan result (allowed, blocked, flagged), latency, and threat category. This aggregate metadata is retained for usage reporting and billing purposes.</li>
+            </ul>
+            <p>We do <span class="highlight">not</span> store the raw content of scanned messages after processing is complete.</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-heading">How We Use Your Data</h2>
+            <ul>
+                <li>Request content is used solely to perform the security scan you requested.</li>
+                <li>Aggregate metadata (scan counts, threat categories) is used to generate your usage dashboard and calculate billing.</li>
+                <li>We do not sell, rent, or share your data with third parties for advertising or marketing purposes.</li>
+                <li>We do not use your data to train general-purpose AI models without explicit consent.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2 class="section-heading">Data Retention</h2>
+            <p>Scanned request content is processed in memory and <span class="highlight">not persisted</span> to disk or database storage after the scan response is returned.</p>
+            <p>Aggregate usage metadata (scan counts, timestamps, threat categories) is retained for <span class="highlight">12 months</span> from the date of the request, after which it is automatically deleted.</p>
+            <p>When you close your account, all associated metadata is deleted within <span class="highlight">30 days</span>.</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-heading">Data Deletion Requests</h2>
+            <p>You may request deletion of your account and all associated metadata at any time by emailing <a href="mailto:info@skintlabs.ai">info@skintlabs.ai</a> with the subject line <strong>"WonderwallAi Data Deletion Request"</strong> and your account email or API key identifier.</p>
+            <p>We will process deletion requests within 5 business days and send confirmation once complete.</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-heading">Third-Party Services</h2>
+            <p>The WonderwallAi hosted API relies on the following infrastructure providers:</p>
+            <ul>
+                <li><strong>Railway:</strong> Cloud hosting for the WonderwallAi API backend. <a href="https://railway.app/legal/privacy" target="_blank" rel="noopener">Railway Privacy Policy</a>.</li>
+            </ul>
+            <p>The hosted API is designed to minimise external dependencies. Scanning is performed locally within our infrastructure without routing content to third-party AI providers.</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-heading">Security</h2>
+            <p>We implement industry-standard security measures including encrypted data transmission (TLS), secure API key management, timing-safe authentication, and full security headers. Our infrastructure runs with automatic security updates on Railway. As an AI security product, security is central to everything we build.</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-heading">Changes to This Policy</h2>
+            <p>We may update this Privacy Policy from time to time. When we do, we will update the effective date at the top of this page. Material changes will be communicated to active API users via email. Continued use of the hosted API after changes are posted constitutes acceptance of the revised policy.</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-heading">Contact</h2>
+            <p>If you have any questions about this Privacy Policy or how we handle your data, please contact us:</p>
+            <ul>
+                <li><strong>Email:</strong> <a href="mailto:info@skintlabs.ai">info@skintlabs.ai</a></li>
+                <li><strong>Company:</strong> Skint Labs</li>
+                <li><strong>Location:</strong> Melbourne, Australia</li>
+            </ul>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <span class="footer-brand">WonderwallAi by Skint Labs</span>
+            <div class="footer-links">
+                <a href="https://wonderwallai.skintlabs.ai">Home</a>
+                <a href="https://wonderwallai.skintlabs.ai/privacy.html">Privacy Policy</a>
+                <a href="mailto:info@skintlabs.ai">Support</a>
+                <a href="https://skintlabs.ai">Skint Labs</a>
+            </div>
+            <p>&copy; 2026 Skint Labs. Melbourne, Australia.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
