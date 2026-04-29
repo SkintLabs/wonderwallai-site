@@ -41,8 +41,9 @@
         a:hover { color: var(--coral); }
 
         /* NAV */
-        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 32px; height: 56px; display: flex; align-items: center; justify-content: space-between; background: rgba(12,11,10,0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
-        .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; font-size: 1rem; color: var(--text); letter-spacing: 0.5px; }
+        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between; background: rgba(12,11,10,0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+        .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 800; font-size: 1rem; color: var(--text); letter-spacing: 0.5px; }
+        .nav-brand img { height: 36px; width: 36px; display: block; }
         .nav-brand span { opacity: 0.5; font-weight: 400; }
         .nav-links { display: flex; gap: 20px; list-style: none; }
         .nav-links a { color: var(--text-muted); font-size: 0.82rem; font-weight: 500; }
@@ -53,6 +54,7 @@
         /* LOGIN */
         .login-wrapper { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
         .login-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 48px; max-width: 420px; width: 100%; text-align: center; }
+        .login-mark { display: block; margin: 0 auto 20px; height: 96px; width: 96px; }
         .login-logo { font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; }
         .login-logo em { font-style: normal; background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .login-sub { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 32px; }
@@ -66,6 +68,23 @@
 
         /* DASHBOARD */
         .dashboard { display: none; padding: 80px 24px 40px; max-width: 1100px; margin: 0 auto; }
+
+        /* HELP CARD */
+        .help-card { margin-top: 40px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 28px 32px; display: flex; align-items: center; gap: 24px; }
+        .help-card-text { flex: 1; }
+        .help-card-title { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+        .help-card-sub { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.55; }
+        .help-card-mail { display: inline-flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--orange); padding: 8px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; }
+        .help-card-mail:hover { border-color: var(--orange); color: var(--coral); }
+
+        /* FOOTER */
+        .dash-footer { max-width: 1100px; margin: 48px auto 0; padding: 28px 24px 36px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+        .dash-footer-left { display: flex; align-items: center; gap: 14px; }
+        .dash-footer-left .ft-by { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); }
+        .dash-footer-left img { height: 28px; width: auto; display: block; opacity: 0.85; }
+        .dash-footer-right { font-size: 0.78rem; color: var(--text-muted); }
+        .dash-footer-right a { color: var(--text-muted); margin-left: 16px; }
+        .dash-footer-right a:hover { color: var(--orange); }
 
         /* TABS */
         .tabs { display: flex; gap: 4px; margin-bottom: 32px; border-bottom: 1px solid var(--border); padding-bottom: 0; overflow-x: auto; }
@@ -211,7 +230,7 @@
 
 <!-- ═══ NAV ═══ -->
 <nav class="nav" id="nav" style="display:none">
-    <a href="./" class="nav-brand">WonderwallAi <span>/ Dashboard</span></a>
+    <a href="./" class="nav-brand"><img src="assets/wonderwallai-logo.png" alt="WonderwallAi"> WonderwallAi <span>/ Dashboard</span></a>
     <div style="display:flex;align-items:center;gap:16px;">
         <ul class="nav-links" style="display:none" id="nav-links">
             <li><a href="./">Landing Page</a></li>
@@ -224,6 +243,7 @@
 <!-- ═══ LOGIN ═══ -->
 <div class="login-wrapper" id="login-screen">
     <div class="login-card">
+        <img src="assets/wonderwallai-logo.png" alt="WonderwallAi" class="login-mark">
         <div class="login-logo"><em>WonderwallAi</em> Dashboard</div>
         <p class="login-sub">Enter your API key to access your dashboard</p>
         <input type="password" class="login-input" id="api-key-input" placeholder="ww_live_..." autofocus>
@@ -408,6 +428,29 @@ verdict = client.scan_outbound(
   -d <span class="str">'{"message": "How do I return my order?"}'</span></code><button class="copy-btn" onclick="copyText('code-curl')">Copy</button></div>
         </div>
     </div>
+
+    <!-- HELP -->
+    <div class="help-card">
+        <div class="help-card-text">
+            <div class="help-card-title">Need a hand?</div>
+            <div class="help-card-sub">Troubleshooting, integration questions, billing, or anything else, send me a note and I'll get back to you personally.</div>
+            <a href="mailto:info@skintlabs.ai?subject=WonderwallAi%20support" class="help-card-mail">info@skintlabs.ai</a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="dash-footer">
+        <div class="dash-footer-left">
+            <span class="ft-by">a product by</span>
+            <a href="https://skintlabs.ai"><img src="assets/skintlabs-wordmark-white.png" alt="Skint Labs"></a>
+        </div>
+        <div class="dash-footer-right">
+            <a href="./">Landing</a>
+            <a href="https://github.com/SkintLabs/WonderwallAi">GitHub</a>
+            <a href="./privacy.html">Privacy</a>
+            <a href="mailto:info@skintlabs.ai">Contact</a>
+        </div>
+    </footer>
 </div>
 
 <script>
@@ -632,21 +675,34 @@ function loadBilling() {
     `;
 
     const plans = [
-        { name: 'free', price: '$0', scans: '1,000 scans/mo', rate: '10 req/min' },
-        { name: 'starter', price: '$19', scans: '50,000 scans/mo', rate: '60 req/min' },
-        { name: 'pro', price: '$99', scans: '500,000 scans/mo', rate: '200 req/min' },
-        { name: 'business', price: '$249', scans: '2,000,000 scans/mo', rate: '500 req/min' },
-        { name: 'enterprise', price: 'Custom', scans: 'Unlimited', rate: '1,000 req/min' },
+        { name: 'free',       price: '$0',     scans: '1,000 scans/mo',       rate: '10 req/min'    },
+        { name: 'starter',    price: '$19',    scans: '50,000 scans/mo',      rate: '60 req/min'    },
+        { name: 'pro',        price: '$99',    scans: '500,000 scans/mo',     rate: '200 req/min'   },
+        { name: 'business',   price: '$249',   scans: '2,000,000 scans/mo',   rate: '500 req/min'   },
+        { name: 'enterprise', price: 'Custom', scans: 'Unlimited',            rate: '1,000 req/min' },
     ];
 
-    document.getElementById('plan-grid').innerHTML = plans.map(p => `
+    // Show the user's current plan + every plan above it (no downgrades shown)
+    const currentIdx = plans.findIndex(p => p.name === d.plan);
+    const visible = currentIdx >= 0 ? plans.slice(currentIdx) : plans.slice(1);
+
+    if (visible.length <= 1) {
+        // Already on the top tier — nothing to upgrade to
+        document.getElementById('plan-grid').innerHTML =
+            '<div style="color:var(--text-muted);font-size:0.9rem;padding:24px">' +
+            'You\'re on the top tier. Need something custom? ' +
+            '<a href="mailto:skintlabs@gmail.com" style="color:var(--orange)">Get in touch</a>.' +
+            '</div>';
+        return;
+    }
+
+    document.getElementById('plan-grid').innerHTML = visible.map(p => `
         <div class="plan-card ${p.name === d.plan ? 'current' : ''}">
             <h4>${p.name}</h4>
             <div class="plan-price">${p.price} ${p.name !== 'enterprise' ? '<span>/mo</span>' : ''}</div>
             <div class="plan-scans">${p.scans}</div>
             <div class="plan-rate">${p.rate}</div>
             ${p.name === d.plan ? '<span class="badge badge-active">Current</span>' :
-              p.name === 'free' ? '' :
               p.name === 'enterprise' ? '<a href="mailto:skintlabs@gmail.com" class="btn btn-outline btn-sm">Contact Us</a>' :
               `<a href="${API_BASE}/v1/billing/checkout?plan=${p.name}" class="btn btn-orange btn-sm" target="_blank">Upgrade</a>`}
         </div>
