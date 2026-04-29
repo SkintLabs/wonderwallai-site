@@ -711,6 +711,20 @@
     }
     tick(); setInterval(tick, 1000);
 })();
+
+// Push nav below banner on load, snap back once scrolled past
+(function() {
+    var banner = document.getElementById('ph-banner');
+    var nav = document.querySelector('nav');
+    function adjustNav() {
+        if (!banner || banner.style.display === 'none') { nav.style.top = '0'; return; }
+        var bannerH = banner.offsetHeight;
+        nav.style.top = (window.scrollY < bannerH ? (bannerH - window.scrollY) + 'px' : '0');
+    }
+    adjustNav();
+    window.addEventListener('scroll', adjustNav);
+    document.querySelector('#ph-banner button').addEventListener('click', function() { nav.style.top = '0'; });
+})();
 </script>
 
 <!-- NAV -->
