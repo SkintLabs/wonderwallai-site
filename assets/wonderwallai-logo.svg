@@ -26,9 +26,9 @@
   <!-- Background -->
   <circle cx="200" cy="200" r="196" fill="url(#bgGrad)"/>
 
-  <!-- W letterform — drawn first so ring sits on top of its edges -->
+  <!-- W letterform — dark outline creates contrast where W meets the ring -->
   <path d="M 28 88 L 90 88 L 158 268 L 200 178 L 242 268 L 310 88 L 372 88 L 284 316 L 228 316 L 200 248 L 172 316 L 116 316 Z"
-    fill="url(#wGrad)" filter="url(#glow)"/>
+    fill="url(#wGrad)" stroke="#0c0b0a" stroke-width="4" stroke-linejoin="round" filter="url(#glow)"/>
 
   <!-- Wide sunset ring — drawn over W edges for the Wario break-out effect -->
   <circle cx="200" cy="200" r="168" fill="none" stroke="url(#ringGrad)" stroke-width="44"/>
@@ -86,18 +86,18 @@
       <rect x="-6" y="-4" width="12" height="2" rx="0.4" fill="url(#ringGrad)"/>
     </g>
 
-    <!-- 4. CANNON — bottom-right (319, 319), barrel pointing SE -->
-    <g transform="translate(319, 319) rotate(45)">
-      <!-- barrel -->
-      <rect x="-3.5" y="-13" width="7" height="16" rx="3.5" fill="#0f1e3d"/>
-      <!-- breech (wider base) -->
-      <rect x="-5" y="3" width="10" height="5" rx="2" fill="#0f1e3d"/>
-      <!-- left wheel -->
-      <circle cx="-6" cy="10" r="4" fill="#0f1e3d"/>
-      <circle cx="-6" cy="10" r="2" fill="url(#ringGrad)"/>
-      <!-- right wheel -->
-      <circle cx="6" cy="10" r="4" fill="#0f1e3d"/>
-      <circle cx="6" cy="10" r="2" fill="url(#ringGrad)"/>
+    <!-- 4. SCISSORS — bottom-right (319, 319) -->
+    <g transform="translate(319, 319)" fill="none" stroke="#0f1e3d">
+      <!-- Blade 1: upper-left -->
+      <line x1="0" y1="0" x2="-9" y2="-11" stroke-width="3" stroke-linecap="round"/>
+      <!-- Blade 2: upper-right -->
+      <line x1="0" y1="0" x2="9" y2="-11" stroke-width="3" stroke-linecap="round"/>
+      <!-- Handle ring 1 (left) -->
+      <circle cx="-6" cy="8" r="5" stroke-width="2.8"/>
+      <!-- Handle ring 2 (right) -->
+      <circle cx="6" cy="8" r="5" stroke-width="2.8"/>
+      <!-- Pivot dot -->
+      <circle cx="0" cy="0" r="1.8" fill="#0f1e3d" stroke="none"/>
     </g>
 
     <!-- 5. CROSSED ARROWS — bottom (200, 368) -->
