@@ -674,23 +674,22 @@ function loadBilling() {
         </div>
     `;
 
+    // Free is intentionally not listed as an upgrade option.
     const plans = [
-        { name: 'free',       price: '$0',     scans: '1,000 scans/mo',       rate: '10 req/min'    },
         { name: 'starter',    price: '$19',    scans: '50,000 scans/mo',      rate: '60 req/min'    },
         { name: 'pro',        price: '$99',    scans: '500,000 scans/mo',     rate: '200 req/min'   },
         { name: 'business',   price: '$249',   scans: '2,000,000 scans/mo',   rate: '500 req/min'   },
         { name: 'enterprise', price: 'Custom', scans: 'Unlimited',            rate: '1,000 req/min' },
     ];
 
-    // Show the user's current plan + every plan above it (no downgrades shown)
+    // Show only plans strictly above the user's current tier. Free users see all paid options.
     const currentIdx = plans.findIndex(p => p.name === d.plan);
-    const visible = currentIdx >= 0 ? plans.slice(currentIdx) : plans.slice(1);
+    const visible = currentIdx >= 0 ? plans.slice(currentIdx + 1) : plans;
 
-    if (visible.length <= 1) {
-        // Already on the top tier — nothing to upgrade to
+    if (visible.length === 0) {
         document.getElementById('plan-grid').innerHTML =
             '<div style="color:var(--text-muted);font-size:0.9rem;padding:24px">' +
-            'You\'re on the top tier. Need something custom? ' +
+            "You're on the top tier. Need something custom? " +
             '<a href="mailto:skintlabs@gmail.com" style="color:var(--orange)">Get in touch</a>.' +
             '</div>';
         return;
