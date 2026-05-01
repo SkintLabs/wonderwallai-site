@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  @font-face { font-family: 'PAC'; src: url('assets/PAC-FONT.TTF'); }
+  * { margin: 0; padding: 0; }
+  body { background: #111; display: flex; align-items: center; justify-content: center; height: 100vh; }
+</style>
+</head>
+<body>
+  <canvas id="c" width="400" height="400"></canvas>
+  <script>
+    document.fonts.load("80px PAC").then(function() {
+      var c = document.getElementById('c');
+      var ctx = c.getContext('2d');
+
+      // Black background
+      ctx.fillStyle = '#0c0b0a';
+      ctx.fillRect(0, 0, 400, 400);
+
+      ctx.font = '900 86px PAC';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+
+      // Thick orange stroke to make letters look solid/filled
+      ctx.strokeStyle = '#e76f51';
+      ctx.lineWidth = 28;
+      ctx.lineJoin = 'round';
+      ctx.strokeText('SKINT', 200, 155);
+      ctx.strokeText('LABS', 200, 258);
+
+      // Orange fill on top
+      ctx.fillStyle = '#e76f51';
+      ctx.fillText('SKINT', 200, 155);
+      ctx.fillText('LABS', 200, 258);
+
+      // White inner detail line
+      ctx.strokeStyle = 'rgba(255,255,255,0.45)';
+      ctx.lineWidth = 1.5;
+      ctx.strokeText('SKINT', 200, 155);
+      ctx.strokeText('LABS', 200, 258);
+    });
+  </script>
+</body>
+</html>
