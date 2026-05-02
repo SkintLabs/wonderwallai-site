@@ -9,6 +9,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        @font-face { font-family: 'Kenjaku';    src: url('assets/fonts/Kenjaku DEMO.otf') format('opentype'); }
+        @font-face { font-family: 'NeonFuture'; src: url('assets/NeonFuture.ttf') format('truetype'); }
+        @font-face { font-family: 'RetroByte';  src: url('assets/fonts/RetroByte.ttf') format('truetype'); }
+
         :root {
             --bg: #0c0b0a;
             --bg-subtle: #12100e;
@@ -42,11 +46,11 @@
 
         /* NAV */
         .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between; background: rgba(12,11,10,0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
-        .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 800; font-size: 1rem; color: var(--text); letter-spacing: 0.5px; }
+        .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-family: 'Kenjaku', sans-serif; font-weight: 400; font-size: 1.1rem; color: var(--text); letter-spacing: 0.04em; }
         .nav-brand img { height: 36px; width: 36px; display: block; }
         .nav-brand span { opacity: 0.5; font-weight: 400; }
         .nav-links { display: flex; gap: 20px; list-style: none; }
-        .nav-links a { color: var(--text-muted); font-size: 0.82rem; font-weight: 500; }
+        .nav-links a { font-family: 'RetroByte', sans-serif; color: var(--text-muted); font-size: 0.78rem; font-weight: 400; letter-spacing: 0.06em; }
         .nav-links a:hover { color: var(--text); }
         .nav-logout { color: var(--text-muted); font-size: 0.8rem; cursor: pointer; background: none; border: 1px solid var(--border); padding: 4px 14px; border-radius: 6px; font-family: inherit; transition: all 0.2s; }
         .nav-logout:hover { border-color: var(--border-hover); color: var(--text); }
@@ -55,7 +59,7 @@
         .login-wrapper { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
         .login-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 48px; max-width: 420px; width: 100%; text-align: center; }
         .login-mark { display: block; margin: 0 auto 20px; height: 96px; width: 96px; }
-        .login-logo { font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; }
+        .login-logo { font-family: 'Kenjaku', sans-serif; font-size: 1.6rem; font-weight: 400; letter-spacing: 0.04em; margin-bottom: 8px; }
         .login-logo em { font-style: normal; background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .login-sub { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 32px; }
         .login-input { width: 100%; padding: 12px 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; outline: none; transition: border-color 0.2s; }
@@ -88,7 +92,7 @@
 
         /* TABS */
         .tabs { display: flex; gap: 4px; margin-bottom: 32px; border-bottom: 1px solid var(--border); padding-bottom: 0; overflow-x: auto; }
-        .tab { padding: 10px 18px; font-size: 0.82rem; font-weight: 600; color: var(--text-muted); cursor: pointer; border: none; background: none; font-family: inherit; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.2s; white-space: nowrap; }
+        .tab { padding: 10px 18px; font-size: 0.8rem; font-weight: 400; color: var(--text-muted); cursor: pointer; border: none; background: none; font-family: 'RetroByte', sans-serif; letter-spacing: 0.05em; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.2s; white-space: nowrap; }
         .tab:hover { color: var(--text-secondary); }
         .tab.active { color: var(--orange); border-bottom-color: var(--orange); }
         .tab-panel { display: none; }
@@ -98,7 +102,7 @@
         .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
         .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; }
         .stat-label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 6px; }
-        .stat-value { font-size: 1.8rem; font-weight: 800; color: var(--text); line-height: 1.2; }
+        .stat-value { font-family: 'Kenjaku', sans-serif; font-size: 2rem; font-weight: 400; color: var(--text); line-height: 1.2; letter-spacing: 0.04em; }
         .stat-value.green { color: var(--green); }
         .stat-value.orange { color: var(--orange); }
         .stat-value.red { color: var(--red); }
@@ -132,7 +136,7 @@
 
         /* FORMS */
         .form-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin-bottom: 20px; }
-        .form-section h3 { font-size: 0.85rem; font-weight: 700; color: var(--text); margin-bottom: 20px; }
+        .form-section h3 { font-family: 'NeonFuture', sans-serif; font-size: 0.95rem; font-weight: 400; letter-spacing: 0.03em; color: var(--text); margin-bottom: 20px; }
         .form-group { margin-bottom: 20px; }
         .form-label { display: block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 6px; }
         .form-input, .form-textarea, .form-select { width: 100%; padding: 10px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: 'Inter', sans-serif; font-size: 0.88rem; outline: none; transition: border-color 0.2s; }
