@@ -17,6 +17,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        @font-face { font-family: 'Kenjaku';        src: url('assets/fonts/Kenjaku DEMO.otf') format('opentype'); }
+        @font-face { font-family: 'BecomeCritical'; src: url('assets/fonts/BECOME CRITICAL DEMO.ttf') format('truetype'); }
+        @font-face { font-family: 'Kamikaze';       src: url('assets/fonts/Kamikaze.ttf') format('truetype'); }
+        @font-face { font-family: 'StanderDemo';    src: url('assets/fonts/Stander DEMO.otf') format('opentype'); }
+        @font-face { font-family: 'RoturaVintage';  src: url('assets/fonts/RoturaVintageDemo-Regular.otf') format('opentype'); }
+        @font-face { font-family: 'NeonFuture';     src: url('assets/NeonFuture.ttf') format('truetype'); }
         :root {
             --bg: #0c0b0a;
             --bg-subtle: #12100e;
@@ -84,7 +90,7 @@
             align-items: center;
             height: 64px;
         }
-        .logo { font-size: 1.2rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
+        .logo { font-family: 'Kenjaku', sans-serif; font-size: 2rem; font-weight: 400; color: var(--text); letter-spacing: 0.02em; }
         .logo span { color: var(--accent-hover); }
         .nav-brand {
             display: flex;
@@ -186,15 +192,26 @@
         }
         .hero-badge .dot { display: none; }
         .hero h1 {
+            font-family: 'NeonFuture', sans-serif;
             font-size: 4rem;
-            font-weight: 900;
-            letter-spacing: -0.04em;
+            font-weight: 400;
+            letter-spacing: 0.02em;
             line-height: 1.1;
             margin-bottom: 20px;
             background: var(--gradient-text);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+        }
+        .section-title {
+            font-family: 'NeonFuture', sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+        }
+        .cta h2 {
+            font-family: 'NeonFuture', sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.02em;
         }
         .hero p {
             font-size: 1.2rem;
@@ -689,7 +706,7 @@
 <nav>
     <div class="container">
         <div class="nav-brand">
-            <img src="assets/wonderwallai-logo.png" alt="WonderwallAi" style="height: 38px; width: 38px; border-radius: 50%;"><div class="logo">Wonderwall<span>Ai</span></div>
+            <img src="assets/wonderwallai-logo.png" alt="WonderwallAi" style="height: 38px; width: 38px; border-radius: 50%;"><div class="logo">Wonderwall<span>A</span>i</div>
             <a href="https://skintlabs.ai" target="_blank" rel="noopener"><img src="assets/skintlabs-wordmark-white.png" alt="Skint Labs" style="height: 28px; width: auto; opacity: 0.9;"></a>
         </div>
         <div class="nav-links">
@@ -734,6 +751,9 @@
 <!-- HERO -->
 <section class="hero">
     <div class="container">
+        <div style="display:flex;justify-content:center;margin-bottom:28px;">
+            <img src="assets/wonderwallai-logo.png" alt="WonderwallAi" style="width:200px;height:200px;object-fit:contain;filter:drop-shadow(0 0 40px rgba(231,111,81,0.35));">
+        </div>
         <div class="hero-badge"><span class="dot"></span> Now open source &mdash; MIT licensed</div>
         <h1>Stop Prompt Injection.<br>Protect Your LLM.</h1>
         <p>WonderwallAi is an AI firewall SDK that blocks prompt injection, data leaks, and off-topic abuse. Runs locally with zero external API calls.</p>
@@ -1242,7 +1262,7 @@ wall = Wonderwall(
     <div class="container">
         <div class="footer-inner">
             <div class="footer-left">
-                <span class="logo" style="font-size: 1rem;">Wonderwall<span>Ai</span></span>
+                <span class="logo" style="font-size: 1rem;">Wonderwall<span>A</span>i</span>
                 &nbsp;&middot;&nbsp; MIT License &middot; Built by <a href="https://github.com/SkintLabs">Louis Constant</a>
                 &nbsp;&middot;&nbsp; A <a href="https://skintlabs.ai" style="color: #d4a040;">Skint Labs</a> Product
             </div>
