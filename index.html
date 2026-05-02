@@ -34,9 +34,15 @@
             --text: #ede8e0;
             --text-secondary: #b0a898;
             --text-muted: #7a7268;
-            --accent: #264653;
-            --accent-hover: #2d5363;
-            --accent-glow: rgba(38, 70, 83, 0.2);
+            --accent: #2a9d8f;
+            --accent-hover: #35b8a8;
+            --accent-glow: rgba(42, 157, 143, 0.22);
+            --accent-glow-strong: rgba(42, 157, 143, 0.42);
+            --teal: #3eb8c8;
+            --teal-glow: rgba(62, 184, 200, 0.28);
+            --vivid-blue: #4a9eff;
+            --yellow: #ffd200;
+            --yellow-glow: rgba(255, 210, 0, 0.35);
             --green: #10b981;
             --green-bg: rgba(16, 185, 129, 0.08);
             --blue: #264653;
@@ -46,6 +52,7 @@
             --red: #c1666b;
             --code-bg: #0a0908;
             --gradient-text: linear-gradient(135deg, #e76f51 0%, #f4a261 50%, #e9c46a 100%);
+            --gradient-teal: linear-gradient(135deg, #2a9d8f 0%, #3eb8c8 100%);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -74,6 +81,10 @@
         @keyframes wwWordmarkPulse {
             0%, 100% { text-shadow: 0 0 0 transparent; filter: brightness(1); }
             50%       { filter: brightness(1.15); }
+        }
+        @keyframes navLogoPulse {
+            0%, 100% { text-shadow: 0 0 10px rgba(42,157,143,0.4), 0 0 24px rgba(42,157,143,0.15); }
+            50%       { text-shadow: 0 0 18px rgba(62,184,200,0.6), 0 0 40px rgba(62,184,200,0.25); }
         }
 
         /* cursor-follow glow */
@@ -116,8 +127,8 @@
             align-items: center;
             height: 64px;
         }
-        .logo { font-family: 'Kenjaku', sans-serif; font-size: 2rem; font-weight: 400; color: var(--text); letter-spacing: 0.02em; }
-        .logo span { color: var(--accent-hover); }
+        .logo { font-family: 'Kenjaku', sans-serif; font-size: 2rem; font-weight: 400; color: var(--text); letter-spacing: 0.02em; animation: navLogoPulse 4s ease-in-out infinite; }
+        .logo span { color: var(--vivid-blue); }
         .nav-brand {
             display: flex;
             align-items: center;
@@ -197,7 +208,7 @@
             transform: translateX(-50%);
             width: 900px;
             height: 600px;
-            background: radial-gradient(ellipse at center, rgba(255,200,0,0.06) 0%, var(--accent-glow) 40%, transparent 70%);
+            background: radial-gradient(ellipse at center, rgba(255,210,0,0.10) 0%, rgba(42,157,143,0.12) 40%, transparent 70%);
             pointer-events: none;
             animation: heroBgPulse 5s ease-in-out infinite;
         }
@@ -317,6 +328,10 @@
             text-align: center;
             letter-spacing: -0.03em;
             margin-bottom: 12px;
+            background: var(--gradient-teal);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         .section-subtitle {
             text-align: center;
@@ -340,8 +355,19 @@
             border-radius: 16px;
             padding: 28px;
             transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
-        .layer-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+        .layer-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+            background: var(--gradient-teal);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .layer-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 32px var(--accent-glow); }
+        .layer-card:hover::before { opacity: 1; }
         .layer-icon {
             width: 44px;
             height: 44px;
@@ -471,9 +497,20 @@
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 32px;
-            transition: border-color 0.2s;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
-        .dev-card:hover { border-color: var(--border-hover); }
+        .dev-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+            background: var(--gradient-teal);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .dev-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 32px var(--accent-glow); }
+        .dev-card:hover::before { opacity: 1; }
         .dev-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
         .dev-tag {
             display: inline-block;
@@ -544,9 +581,9 @@
         }
         .price-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
         .price-card.popular {
-            border-color: var(--accent);
-            box-shadow: 0 0 40px var(--accent-glow);
-            background: linear-gradient(180deg, rgba(124,58,237,0.06) 0%, var(--bg-card) 100%);
+            border-color: var(--teal);
+            box-shadow: 0 0 40px var(--teal-glow);
+            background: linear-gradient(180deg, rgba(62,184,200,0.07) 0%, var(--bg-card) 100%);
         }
         .popular-badge {
             display: none;
@@ -665,9 +702,9 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 700px;
-            height: 400px;
-            background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 70%);
+            width: 800px;
+            height: 500px;
+            background: radial-gradient(ellipse at center, rgba(42,157,143,0.18) 0%, rgba(255,210,0,0.06) 40%, transparent 70%);
             pointer-events: none;
         }
         .cta h2 {
@@ -675,6 +712,10 @@
             font-weight: 900;
             letter-spacing: -0.03em;
             margin-bottom: 16px;
+            background: var(--gradient-teal);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         .cta p {
             color: var(--text-secondary);
@@ -697,11 +738,11 @@
             align-items: center;
         }
         .footer-left { color: var(--text-muted); font-size: 0.85rem; }
-        .footer-left a { color: var(--text-muted); }
-        .footer-left a:hover { color: var(--text); }
+        .footer-left a { color: var(--accent); font-weight: 600; }
+        .footer-left a:hover { color: var(--teal); }
         .footer-links { display: flex; gap: 28px; }
         .footer-links a { color: var(--text-muted); font-size: 0.85rem; font-weight: 500; }
-        .footer-links a:hover { color: var(--text); }
+        .footer-links a:hover { color: var(--accent); }
 
         /* ---- RESPONSIVE ---- */
         @media (max-width: 900px) {
@@ -782,7 +823,7 @@
         <div style="display:flex;justify-content:center;margin-bottom:28px;">
             <img src="assets/wonderwallai-logo.png" alt="WonderwallAi" style="width:200px;height:200px;object-fit:contain;animation:logoYellowPulse 3s ease-in-out infinite;">
         </div>
-        <div style="font-family:'Kenjaku',sans-serif;font-size:2.8rem;letter-spacing:0.04em;margin-bottom:16px;background:linear-gradient(135deg,#e76f51 0%,#f4a261 50%,#e9c46a 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Wonderwall<span style="-webkit-text-fill-color:#2d5363">A</span><span style="-webkit-text-fill-color:#e9c46a;font-family:'Kenjaku',sans-serif">i</span></div>
+        <div style="font-family:'Kenjaku',sans-serif;font-size:2.8rem;letter-spacing:0.04em;margin-bottom:16px;background:linear-gradient(135deg,#e76f51 0%,#f4a261 50%,#e9c46a 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:wwWordmarkPulse 4s ease-in-out infinite;">Wonderwall<span style="-webkit-text-fill-color:#4a9eff">A</span><span style="-webkit-text-fill-color:#e9c46a;font-family:'Kenjaku',sans-serif">i</span></div>
         <div class="hero-badge"><span class="dot"></span> Now open source &mdash; MIT licensed</div>
         <h1>Stop Prompt Injection.<br>Protect Your LLM.</h1>
         <p>WonderwallAi is an AI firewall SDK that blocks prompt injection, data leaks, and off-topic abuse. Runs locally with zero external API calls.</p>
