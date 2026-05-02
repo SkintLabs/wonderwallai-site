@@ -23,8 +23,12 @@
             --text: #ede8e0;
             --text-secondary: #b0a898;
             --text-muted: #7a7268;
-            --accent: #264653;
-            --accent-hover: #2d5363;
+            --accent: #2a9d8f;
+            --accent-hover: #35b8a8;
+            --accent-glow: rgba(42, 157, 143, 0.22);
+            --teal: #3eb8c8;
+            --teal-glow: rgba(62, 184, 200, 0.28);
+            --vivid-blue: #4a9eff;
             --green: #10b981;
             --green-bg: rgba(16, 185, 129, 0.08);
             --orange: #e76f51;
@@ -37,6 +41,7 @@
             --sand: #e9c46a;
             --code-bg: #0a0908;
             --gradient-text: linear-gradient(135deg, #e76f51 0%, #f4a261 50%, #e9c46a 100%);
+            --gradient-teal: linear-gradient(135deg, #2a9d8f 0%, #3eb8c8 100%);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -60,7 +65,7 @@
         .login-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 48px; max-width: 420px; width: 100%; text-align: center; }
         .login-mark { display: block; margin: 0 auto 20px; height: 96px; width: 96px; }
         .login-logo { font-family: 'Kenjaku', sans-serif; font-size: 1.6rem; font-weight: 400; letter-spacing: 0.04em; margin-bottom: 8px; }
-        .login-logo em { font-style: normal; background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .login-logo em { font-style: normal; color: var(--vivid-blue); }
         .login-sub { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 32px; }
         .login-input { width: 100%; padding: 12px 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; outline: none; transition: border-color 0.2s; }
         .login-input:focus { border-color: var(--orange); }
@@ -94,7 +99,7 @@
         .tabs { display: flex; gap: 4px; margin-bottom: 32px; border-bottom: 1px solid var(--border); padding-bottom: 0; overflow-x: auto; }
         .tab { padding: 10px 18px; font-size: 0.8rem; font-weight: 400; color: var(--text-muted); cursor: pointer; border: none; background: none; font-family: 'RetroByte', sans-serif; letter-spacing: 0.05em; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.2s; white-space: nowrap; }
         .tab:hover { color: var(--text-secondary); }
-        .tab.active { color: var(--orange); border-bottom-color: var(--orange); }
+        .tab.active { color: var(--teal); border-bottom-color: var(--teal); }
         .tab-panel { display: none; }
         .tab-panel.active { display: block; }
 
