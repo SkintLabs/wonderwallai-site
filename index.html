@@ -62,6 +62,31 @@
         .container-narrow { max-width: 860px; margin: 0 auto; padding: 0 24px; }
 
         /* ---- Animations ---- */
+        @keyframes logoYellowPulse {
+            0%, 100% { filter: drop-shadow(0 0 30px rgba(255,210,0,0.55)) drop-shadow(0 0 70px rgba(255,190,0,0.25)); }
+            50%       { filter: drop-shadow(0 0 55px rgba(255,220,0,0.85)) drop-shadow(0 0 120px rgba(255,200,0,0.45)) drop-shadow(0 0 20px rgba(255,255,100,0.3)); }
+        }
+        @keyframes heroBgPulse {
+            0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+            50%       { opacity: 0.9; transform: translateX(-50%) scale(1.1); }
+        }
+        @keyframes wwWordmarkPulse {
+            0%, 100% { text-shadow: 0 0 0 transparent; filter: brightness(1); }
+            50%       { filter: brightness(1.15); }
+        }
+
+        /* cursor-follow glow */
+        .hero-cursor-glow {
+            position: absolute;
+            width: 700px; height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,210,0,0.07) 0%, rgba(38,70,83,0.06) 40%, transparent 70%);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: left 0.5s ease, top 0.5s ease;
+            z-index: 0;
+        }
+
         .fade-in {
             opacity: 0;
             transform: translateY(24px);
@@ -169,10 +194,11 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 800px;
-            height: 500px;
-            background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 70%);
+            width: 900px;
+            height: 600px;
+            background: radial-gradient(ellipse at center, rgba(255,200,0,0.06) 0%, var(--accent-glow) 40%, transparent 70%);
             pointer-events: none;
+            animation: heroBgPulse 5s ease-in-out infinite;
         }
         .hero-badge {
             display: inline-flex;
@@ -749,10 +775,11 @@
 
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="hero-section">
+    <div class="hero-cursor-glow" id="heroCursorGlow"></div>
     <div class="container">
         <div style="display:flex;justify-content:center;margin-bottom:28px;">
-            <img src="assets/wonderwallai-logo.png" alt="WonderwallAi" style="width:200px;height:200px;object-fit:contain;filter:drop-shadow(0 0 40px rgba(231,111,81,0.35));">
+            <img src="assets/wonderwallai-logo.png" alt="WonderwallAi" style="width:200px;height:200px;object-fit:contain;animation:logoYellowPulse 3s ease-in-out infinite;">
         </div>
         <div style="font-family:'Kenjaku',sans-serif;font-size:2.8rem;letter-spacing:0.04em;margin-bottom:16px;background:linear-gradient(135deg,#e76f51 0%,#f4a261 50%,#e9c46a 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Wonderwall<span style="-webkit-text-fill-color:#2d5363">A</span><span style="-webkit-text-fill-color:#e9c46a;font-family:'Kenjaku',sans-serif">i</span></div>
         <div class="hero-badge"><span class="dot"></span> Now open source &mdash; MIT licensed</div>
@@ -1280,6 +1307,18 @@ wall = Wonderwall(
 
 <!-- SCRIPTS -->
 <script>
+// Cursor-follow glow in hero
+(function() {
+    var hero = document.getElementById('hero-section');
+    var glow = document.getElementById('heroCursorGlow');
+    if (!hero || !glow) return;
+    hero.addEventListener('mousemove', function(e) {
+        var r = hero.getBoundingClientRect();
+        glow.style.left = (e.clientX - r.left) + 'px';
+        glow.style.top  = (e.clientY - r.top)  + 'px';
+    });
+})();
+
 // Scroll-triggered fade-in animations
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
