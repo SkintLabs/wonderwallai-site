@@ -84,33 +84,33 @@ body::after {
 
 .desc {
     font-family: 'RetroByte', sans-serif;
-    font-size: 2.6rem;
-    color: #c8bfae;
-    letter-spacing: 0.06em;
-    margin-bottom: 70px;
+    font-size: 3.2rem;
+    color: #ddd2bd;
+    letter-spacing: 0.05em;
+    margin-bottom: 80px;
     line-height: 1.4;
-    max-width: 1900px;
+    max-width: 2000px;
 }
 
 .pills {
     display: flex;
-    gap: 22px;
+    gap: 24px;
     justify-content: center;
     margin-bottom: 60px;
     flex-wrap: wrap;
-    max-width: 2100px;
+    max-width: 2200px;
 }
 .pill {
     font-family: 'RetroByte', sans-serif;
-    font-size: 1.8rem;
-    padding: 16px 34px;
-    border: 2px solid #2a2520;
-    border-radius: 12px;
-    color: #c8bfae;
+    font-size: 2.4rem;
+    padding: 22px 42px;
+    border: 2px solid #4a4035;
+    border-radius: 14px;
+    color: #ede8e0;
     letter-spacing: 0.04em;
 }
-.pill.green { border-color: #10b981; color: #10b981; }
-.pill.teal { border-color: #2a9d8f; color: #2a9d8f; }
+.pill.green { border-color: #10b981; color: #2dd4a8; }
+.pill.teal  { border-color: #2a9d8f; color: #4cc4b3; }
 
 .footer {
     position: absolute;
@@ -120,8 +120,8 @@ body::after {
     display: flex;
     justify-content: space-between;
     font-family: 'RetroByte', sans-serif;
-    font-size: 1.6rem;
-    color: #9a9180;
+    font-size: 2.1rem;
+    color: #b8ad96;
     letter-spacing: 0.06em;
     text-transform: uppercase;
 }
