@@ -1100,7 +1100,7 @@ wall = Wonderwall(
             <div class="code-section">
                 <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div>&nbsp;&nbsp;terminal</div>
                 <pre class="code-block"><span class="cm"># Use the hosted API, no SDK installation needed</span>
-<span class="fn">curl</span> -X POST https://wonderwallai-production.up.railway.app/v1/scan/inbound \
+<span class="fn">curl</span> -X POST https://api.wonderwallai.com/v1/scan/inbound \
   -H <span class="str">"Authorization: Bearer ww_live_abc123..."</span> \
   -H <span class="str">"Content-Type: application/json"</span> \
   -d <span class="str">'{"message": "How do I track my order?"}'</span>
@@ -1207,7 +1207,7 @@ wall = Wonderwall(
                     <li>Overage: $0.0006/scan</li>
                     <li>Email support</li>
                 </ul>
-                <a href="https://wonderwallai-production.up.railway.app/v1/billing/checkout?plan=starter" class="btn btn-outline">Get Started</a>
+                <a href="mailto:support@skintlabs.ai?subject=WonderwallAi+Starter+Plan" class="btn btn-outline">Get Started</a>
             </div>
             <div class="price-card popular" data-plan="pro">
                 <span class="eb-badge">50% OFF</span>
@@ -1222,7 +1222,7 @@ wall = Wonderwall(
                     <li>Overage: $0.0003/scan</li>
                     <li>Priority support</li>
                 </ul>
-                <a href="https://wonderwallai-production.up.railway.app/v1/billing/checkout?plan=pro" class="btn btn-primary">Get Started</a>
+                <a href="mailto:support@skintlabs.ai?subject=WonderwallAi+Pro+Plan" class="btn btn-primary">Get Started</a>
             </div>
             <div class="price-card" data-plan="business">
                 <span class="eb-badge">50% OFF</span>
@@ -1236,7 +1236,7 @@ wall = Wonderwall(
                     <li>Overage: $0.0002/scan</li>
                     <li>Dedicated support + SLA</li>
                 </ul>
-                <a href="https://wonderwallai-production.up.railway.app/v1/billing/checkout?plan=business" class="btn btn-outline">Get Started</a>
+                <a href="mailto:support@skintlabs.ai?subject=WonderwallAi+Business+Plan" class="btn btn-outline">Get Started</a>
             </div>
         </div>
         <p style="text-align: center; color: var(--text-muted); margin-top: 36px; font-size: 0.9rem;">
@@ -1398,39 +1398,21 @@ document.querySelectorAll('.faq-question').forEach(btn => {
     });
 });
 
-// Early bird pricing (progressive enhancement — full prices shown if API is unreachable)
-(async function() {
-    try {
-        // Try API first; fall back to showing early bird statically if no API available
-        let data = null;
-        try {
-            const res = await fetch('https://api.wonderwallai.com/v1/billing/early-bird', { signal: AbortSignal.timeout(3000) });
-            if (res.ok) data = await res.json();
-        } catch (_) { /* API not deployed yet — use static fallback below */ }
+// Early bird pricing
+(function() {
+    const data = { active: true, remaining_spots: 300, discount_percent: 50 };
 
-        // Static fallback: show early bird until API is live (remove this block once deployed)
-        if (!data) {
-            data = { active: true, remaining_spots: 300, discount_percent: 50 };
-        }
+    const banner = document.getElementById('early-bird-banner');
+    if (banner) banner.style.display = '';
+    const counter = document.getElementById('early-bird-remaining');
+    if (counter) counter.textContent = data.remaining_spots;
 
-        if (!data.active) return;
-
-        // Show banner + counter
-        const banner = document.getElementById('early-bird-banner');
-        if (banner) banner.style.display = '';
-        const counter = document.getElementById('early-bird-remaining');
-        if (counter) counter.textContent = data.remaining_spots;
-
-        // Toggle discounted prices on paid cards
-        document.querySelectorAll('.price-card[data-plan]').forEach(card => {
-            card.querySelector('.eb-badge').style.display = 'block';
-            card.querySelector('.price-original').style.display = 'block';
-            card.querySelector('.price-full').style.display = 'none';
-            card.querySelector('.price-discounted').style.display = 'inline';
-        });
-    } catch (e) {
-        // Silently fail — users see full prices
-    }
+    document.querySelectorAll('.price-card[data-plan]').forEach(card => {
+        card.querySelector('.eb-badge').style.display = 'block';
+        card.querySelector('.price-original').style.display = 'block';
+        card.querySelector('.price-full').style.display = 'none';
+        card.querySelector('.price-discounted').style.display = 'inline';
+    });
 })();
 </script>
 
