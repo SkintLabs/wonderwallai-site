@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com https://api.producthunt.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://api.wonderwallai.com https://api.producthunt.com; frame-src https://js.stripe.com https://hooks.stripe.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://checkout.stripe.com; object-src 'none'">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>WonderwallAi: AI Firewall for LLM Applications</title>
     <meta name="description" content="Protect your LLM applications from prompt injection, data leaks, and off-topic abuse. Open-source Python SDK + hosted API. Catches 90% of threats locally in under 2ms. Zero API calls on the fast path.">
     <meta property="og:title" content="WonderwallAi: AI Firewall for LLM Applications">
