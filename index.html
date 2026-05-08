@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WonderwallAi — AI Firewall for LLM Applications</title>
+    <title>WonderwallAi: AI Firewall for LLM Applications</title>
     <meta name="description" content="Protect your LLM applications from prompt injection, data leaks, and off-topic abuse. Open-source Python SDK + hosted API. Catches 90% of threats locally in under 2ms. Zero API calls on the fast path.">
-    <meta property="og:title" content="WonderwallAi — AI Firewall for LLM Applications">
+    <meta property="og:title" content="WonderwallAi: AI Firewall for LLM Applications">
     <meta property="og:description" content="Open-source AI firewall SDK. Prompt injection detection, PII filtering, canary tokens, semantic topic enforcement. Catches 90% of threats locally in under 2ms. Zero API calls on the fast path.">
     <meta property="og:image" content="https://wonderwallai.skintlabs.ai/og-image-v2.png">
     <meta property="og:url" content="https://wonderwallai.skintlabs.ai">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="WonderwallAi — AI Firewall for LLM Applications">
+    <meta name="twitter:title" content="WonderwallAi: AI Firewall for LLM Applications">
     <meta name="twitter:image" content="https://wonderwallai.skintlabs.ai/og-image-v2.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -830,7 +830,7 @@
             <img src="assets/wonderwallai-logo.png" alt="WonderwallAi" style="width:200px;height:200px;object-fit:contain;animation:logoYellowPulse 3s ease-in-out infinite;">
         </div>
         <div style="font-family:'Kenjaku',sans-serif;font-size:2.8rem;letter-spacing:0.04em;margin-bottom:16px;background:linear-gradient(135deg,#e76f51 0%,#f4a261 50%,#e9c46a 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:wwWordmarkPulse 4s ease-in-out infinite;">Wonderwall<span style="-webkit-text-fill-color:#4a9eff">A</span><span style="-webkit-text-fill-color:#e9c46a;font-family:'Kenjaku',sans-serif">i</span></div>
-        <div class="hero-badge"><span class="dot"></span> Now open source &mdash; MIT licensed</div>
+        <div class="hero-badge"><span class="dot"></span> Now open source, MIT licensed</div>
         <h1>Stop Prompt Injection.<br>Protect Your LLM.</h1>
         <p>WonderwallAi is an AI firewall SDK that blocks prompt injection, data leaks, and off-topic abuse. Runs locally with zero external API calls.</p>
         <div class="hero-buttons">
@@ -1099,7 +1099,7 @@ wall = Wonderwall(
         <div class="tab-content" id="tab-api">
             <div class="code-section">
                 <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div>&nbsp;&nbsp;terminal</div>
-                <pre class="code-block"><span class="cm"># Use the hosted API — no SDK installation needed</span>
+                <pre class="code-block"><span class="cm"># Use the hosted API, no SDK installation needed</span>
 <span class="fn">curl</span> -X POST https://wonderwallai-production.up.railway.app/v1/scan/inbound \
   -H <span class="str">"Authorization: Bearer ww_live_abc123..."</span> \
   -H <span class="str">"Content-Type: application/json"</span> \
@@ -1173,7 +1173,7 @@ wall = Wonderwall(
                 
                 <div class="early-bird-text">
                     <strong>Early Bird Special: 50% off forever</strong>
-                    <span>Lock in half-price for life. Use code <strong style="background:rgba(255,255,255,0.15); padding: 1px 6px; border-radius: 3px; letter-spacing:0.05em; color:var(--text);">EARLYBIRD50</strong> at checkout. Limited to the first 288 paying customers.</span>
+                    <span>Lock in half-price for life. Use code <strong style="background:rgba(255,255,255,0.15); padding: 1px 6px; border-radius: 3px; letter-spacing:0.05em; color:var(--text);">EARLYBIRD50</strong> at checkout. Limited to the first 300 paying customers.</span>
                 </div>
                 <div class="early-bird-counter">
                     <span id="early-bird-remaining" class="early-bird-count">---</span>
@@ -1250,7 +1250,7 @@ wall = Wonderwall(
     <div class="container">
         <div class="section-label fade-in">Get In Touch</div>
         <h2 class="section-title fade-in">Contact Skint Labs</h2>
-        <p class="section-subtitle fade-in">Questions, support, or just want to say hi — we'd love to hear from you.</p>
+        <p class="section-subtitle fade-in">Questions, support, or just want to say hi. We'd love to hear from you.</p>
 
         <div class="testimonial-grid fade-in">
             <div class="testimonial-card" style="text-align:center;">
@@ -1298,10 +1298,10 @@ wall = Wonderwall(
             </div>
             <div class="faq-item">
                 <button class="faq-question">What's a canary token?<span class="faq-icon">+</span></button>
-                <div class="faq-answer"><div class="faq-answer-inner">A canary token is a unique random string you inject into your LLM's system prompt with an instruction to never reveal it. WonderwallAi generates deterministic canary tokens per session and checks if they appear in the LLM's response. If one does, it means someone successfully extracted your system prompt — the response is hard-blocked. This has zero false positives and is the most reliable way to detect system prompt extraction.</div></div>
+                <div class="faq-answer"><div class="faq-answer-inner">A canary token is a unique random string you inject into your LLM's system prompt with an instruction to never reveal it. WonderwallAi generates deterministic canary tokens per session and checks if they appear in the LLM's response. If one does, it means someone successfully extracted your system prompt, so the response is hard-blocked. This has zero false positives and is the most reliable way to detect system prompt extraction.</div></div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">SDK vs Hosted API — which should I use?<span class="faq-icon">+</span></button>
+                <button class="faq-question">SDK vs Hosted API: which should I use?<span class="faq-icon">+</span></button>
                 <div class="faq-answer"><div class="faq-answer-inner">Use the SDK if you want maximum privacy and minimum latency (messages never leave your server). Use the hosted API if you want a zero-dependency integration via HTTP calls, or if you're not using Python. Both provide the same protection layers. The SDK is free and open source. The hosted API has a free tier (1,000 scans/month) and paid plans for higher volume.</div></div>
             </div>
             <div class="faq-item">
