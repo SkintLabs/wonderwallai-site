@@ -825,24 +825,180 @@
 </script>
 
 
-<!-- HERO -->
-<section class="hero" id="hero-section">
+<!-- SCANNER HERO STYLES -->
+<style>
+.scanner-section { padding: 80px 0 60px; position: relative; overflow: hidden; }
+.scanner-section .hero-cursor-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%); pointer-events: none; opacity: 0.5; transition: transform 0.2s ease-out; }
+.scanner-mark { display: flex; flex-direction: column; align-items: center; margin-bottom: 28px; }
+.scanner-mark img { width: 110px; height: 110px; object-fit: contain; animation: logoYellowPulse 3s ease-in-out infinite; }
+.scanner-wordmark { font-family: 'Kenjaku', sans-serif; font-size: 1.8rem; letter-spacing: 0.04em; margin-top: 12px; background: linear-gradient(135deg,#e76f51 0%,#f4a261 50%,#e9c46a 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: wwWordmarkPulse 4s ease-in-out infinite; }
+.scanner-h1 { font-family: 'Kamikaze', sans-serif; text-align: center; font-size: clamp(2.4rem, 5vw, 3.6rem); line-height: 1.05; margin: 6px 0 14px; color: var(--text); letter-spacing: 0.02em; }
+.scanner-h1 .accent { background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.scanner-sub { text-align: center; max-width: 720px; margin: 0 auto 34px; color: var(--text-secondary); font-size: 1.05rem; line-height: 1.6; }
+
+.scanner-card { max-width: 760px; margin: 0 auto; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 22px 22px 26px; box-shadow: 0 10px 40px rgba(0,0,0,0.35); }
+.scanner-card:hover { border-color: var(--border-hover); }
+
+.scanner-tabs { display: flex; gap: 6px; margin-bottom: 18px; border-bottom: 1px solid var(--border); }
+.scanner-tab { background: none; border: none; padding: 10px 16px; color: var(--text-muted); font-family: inherit; font-size: 0.9rem; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; }
+.scanner-tab:hover { color: var(--text-secondary); }
+.scanner-tab.active { color: var(--accent-hover); border-bottom-color: var(--accent); font-weight: 500; }
+
+.scanner-input-wrap { position: relative; }
+.scanner-input, .scanner-textarea { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; resize: vertical; transition: border-color 0.15s, box-shadow 0.15s; }
+.scanner-input:focus, .scanner-textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+.scanner-textarea { min-height: 140px; line-height: 1.5; }
+
+.scanner-advanced { margin-top: 12px; }
+.scanner-advanced summary { cursor: pointer; color: var(--text-muted); font-size: 0.82rem; padding: 6px 0; user-select: none; list-style: none; }
+.scanner-advanced summary::before { content: "▸ "; display: inline-block; transition: transform 0.15s; }
+.scanner-advanced[open] summary::before { transform: rotate(90deg); }
+.scanner-advanced-grid { display: grid; grid-template-columns: 110px 1fr; gap: 10px 12px; margin-top: 10px; padding: 14px; background: var(--bg); border-radius: 8px; border: 1px solid var(--border); }
+.scanner-advanced-grid label { color: var(--text-muted); font-size: 0.82rem; align-self: center; }
+.scanner-advanced-grid input, .scanner-advanced-grid textarea { background: var(--code-bg); border: 1px solid var(--border); border-radius: 6px; padding: 7px 10px; color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; }
+.scanner-advanced-grid textarea { min-height: 56px; resize: vertical; }
+
+.scanner-actions { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 18px; flex-wrap: wrap; }
+.scanner-trust { color: var(--text-muted); font-size: 0.82rem; }
+.scanner-go { background: var(--accent); color: white; border: none; border-radius: 10px; padding: 13px 28px; font-family: inherit; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.15s; box-shadow: 0 0 24px var(--accent-glow); }
+.scanner-go:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 0 36px var(--accent-glow-strong); }
+.scanner-go:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
+.scanner-go .spinner { display: none; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.35); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: -3px; margin-right: 8px; }
+.scanner-go.loading .spinner { display: inline-block; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.scanner-error { display: none; margin-top: 16px; padding: 12px 16px; background: rgba(231, 111, 81, 0.1); border: 1px solid var(--orange); border-radius: 8px; color: var(--orange); font-size: 0.9rem; }
+.scanner-error.show { display: block; }
+
+/* RESULTS PANEL */
+.results-wrap { max-width: 920px; margin: 28px auto 0; display: none; }
+.results-wrap.show { display: block; }
+
+.results-headline { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 24px 28px; }
+.results-score { font-family: 'Kamikaze', sans-serif; font-size: 4.6rem; line-height: 1; letter-spacing: -0.02em; }
+.results-score .of { color: var(--text-muted); font-size: 1.4rem; font-weight: 400; margin-left: 4px; }
+.results-score-meta { display: flex; flex-direction: column; gap: 6px; }
+.results-risk { font-family: 'Kamikaze', sans-serif; font-size: 1.6rem; letter-spacing: 0.02em; }
+.results-target { color: var(--text-muted); font-size: 0.85rem; word-break: break-all; }
+.results-stats { color: var(--text-secondary); font-size: 0.92rem; }
+.results-stats .ok { color: var(--green); }
+.results-stats .bad { color: var(--orange); }
+
+.results-note { margin-top: 14px; padding: 10px 14px; background: rgba(255, 210, 0, 0.06); border: 1px solid rgba(255, 210, 0, 0.25); border-radius: 8px; color: var(--text-secondary); font-size: 0.86rem; }
+
+.results-findings { margin-top: 22px; display: flex; flex-direction: column; gap: 10px; }
+.finding { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; }
+.finding[data-severity="critical"][data-succeeded="true"] { border-left: 3px solid var(--red); }
+.finding[data-severity="high"][data-succeeded="true"] { border-left: 3px solid var(--orange); }
+.finding[data-severity="medium"][data-succeeded="true"] { border-left: 3px solid var(--yellow); }
+.finding[data-succeeded="false"] { border-left: 3px solid var(--green); opacity: 0.85; }
+.finding summary { cursor: pointer; display: flex; gap: 12px; align-items: center; list-style: none; user-select: none; }
+.finding summary::-webkit-details-marker { display: none; }
+.finding-icon { font-size: 1.05rem; }
+.finding-title { flex: 1; color: var(--text); font-weight: 500; }
+.finding-pill { font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; font-weight: 600; }
+.finding-pill.crit { background: rgba(193, 102, 107, 0.18); color: #ff8a8f; }
+.finding-pill.high { background: rgba(231, 111, 81, 0.18); color: #ffa085; }
+.finding-pill.med { background: rgba(255, 210, 0, 0.18); color: #ffe170; }
+.finding-pill.ok { background: rgba(16, 185, 129, 0.18); color: #34d399; }
+.finding-body { padding: 12px 4px 4px; color: var(--text-secondary); font-size: 0.92rem; line-height: 1.55; }
+.finding-body h4 { color: var(--text); font-size: 0.86rem; margin: 14px 0 6px; letter-spacing: 0.04em; text-transform: uppercase; }
+.finding-body pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; font-size: 0.82rem; line-height: 1.5; white-space: pre-wrap; word-break: break-word; max-height: 240px; overflow-y: auto; }
+
+.results-cta { margin-top: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.results-cta a { display: block; padding: 18px 22px; border-radius: 12px; text-decoration: none; transition: all 0.15s; }
+.results-cta a strong { display: block; font-size: 1.05rem; margin-bottom: 4px; }
+.results-cta a span { display: block; font-size: 0.86rem; opacity: 0.85; }
+.results-cta .free-path { background: var(--bg-card); border: 1px solid var(--border); color: var(--text); }
+.results-cta .free-path:hover { border-color: var(--border-hover); background: var(--bg-card-hover); }
+.results-cta .pro-path { background: var(--accent); color: white; box-shadow: 0 0 24px var(--accent-glow); border: 1px solid transparent; }
+.results-cta .pro-path:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 0 36px var(--accent-glow-strong); }
+
+@media (max-width: 720px) {
+    .results-headline { grid-template-columns: 1fr; text-align: center; }
+    .results-cta { grid-template-columns: 1fr; }
+    .scanner-advanced-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<!-- SCANNER HERO -->
+<section class="scanner-section" id="hero-section">
     <div class="hero-cursor-glow" id="heroCursorGlow"></div>
     <div class="container">
-        <div style="display:flex;justify-content:center;margin-bottom:28px;">
-            <img src="assets/wonderwallai-logo.png" alt="WonderwallAi" style="width:200px;height:200px;object-fit:contain;animation:logoYellowPulse 3s ease-in-out infinite;">
+        <div class="scanner-mark">
+            <img src="assets/wonderwallai-logo.png" alt="WonderwallAi">
+            <div class="scanner-wordmark">Wonderwall<span style="-webkit-text-fill-color:#4a9eff">A</span><span style="-webkit-text-fill-color:#e9c46a;font-family:'Kenjaku',sans-serif">i</span></div>
         </div>
-        <div style="font-family:'Kenjaku',sans-serif;font-size:2.8rem;letter-spacing:0.04em;margin-bottom:16px;background:linear-gradient(135deg,#e76f51 0%,#f4a261 50%,#e9c46a 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:wwWordmarkPulse 4s ease-in-out infinite;">Wonderwall<span style="-webkit-text-fill-color:#4a9eff">A</span><span style="-webkit-text-fill-color:#e9c46a;font-family:'Kenjaku',sans-serif">i</span></div>
-        <div class="hero-badge"><span class="dot"></span> Now open source, MIT licensed</div>
-        <h1>Stop Prompt Injection.<br>Protect Your LLM.</h1>
-        <p>WonderwallAi is an AI firewall SDK that blocks prompt injection, data leaks, and off-topic abuse. Runs locally with zero external API calls.</p>
-        <div class="hero-buttons">
-            <a href="https://github.com/SkintLabs/WonderwallAi" class="btn btn-primary btn-lg">View on GitHub</a>
+
+        <h1 class="scanner-h1">How safe is your <span class="accent">LLM?</span></h1>
+        <p class="scanner-sub">Paste your AI app's URL. We'll run 20 real prompt injection, jailbreak, and data extraction attacks against it and show you exactly what gets through. Free. No signup.</p>
+
+        <div class="scanner-card">
+            <div class="scanner-tabs" role="tablist">
+                <button type="button" class="scanner-tab active" data-tab="url" role="tab" aria-selected="true">Scan a live AI app</button>
+                <button type="button" class="scanner-tab" data-tab="prompt" role="tab" aria-selected="false">Test a system prompt</button>
+            </div>
+
+            <div class="scanner-pane" data-pane="url">
+                <div class="scanner-input-wrap">
+                    <input id="scan-url-input" type="url" class="scanner-input" placeholder="https://chat.acme.com" autocomplete="off" spellcheck="false">
+                </div>
+                <details class="scanner-advanced">
+                    <summary>Advanced: my chatbot uses a non-standard endpoint</summary>
+                    <div class="scanner-advanced-grid">
+                        <label for="adv-method">HTTP method</label>
+                        <input id="adv-method" type="text" value="POST" maxlength="6">
+                        <label for="adv-path">Path</label>
+                        <input id="adv-path" type="text" value="/api/chat" placeholder="/api/chat">
+                        <label for="adv-body">JSON body</label>
+                        <textarea id="adv-body" spellcheck="false">{"message": "{{message}}"}</textarea>
+                        <label for="adv-headers">Headers (JSON)</label>
+                        <textarea id="adv-headers" spellcheck="false" placeholder='{"Authorization": "Bearer ..."}'></textarea>
+                    </div>
+                </details>
+            </div>
+
+            <div class="scanner-pane" data-pane="prompt" hidden>
+                <div class="scanner-input-wrap">
+                    <textarea id="scan-prompt-input" class="scanner-textarea" placeholder="You are a helpful customer service assistant for ACME Corp. Only answer questions about orders, returns, and shipping..."></textarea>
+                </div>
+            </div>
+
+            <div class="scanner-actions">
+                <span class="scanner-trust">Scan free. Only pay if your LLM is exposed.</span>
+                <button id="scan-go" type="button" class="scanner-go">
+                    <span class="spinner"></span><span class="scan-label">Scan for Vulnerabilities</span>
+                </button>
+            </div>
+
+            <div id="scan-error" class="scanner-error"></div>
         </div>
-        <div class="install-cmd">
-            <span class="dollar">$</span> pip install wonderwallai
+
+        <!-- RESULTS PANEL (hidden until first scan completes) -->
+        <div id="results" class="results-wrap" aria-live="polite">
+            <div class="results-headline">
+                <div class="results-score" id="results-score">--<span class="of">/100</span></div>
+                <div class="results-score-meta">
+                    <div class="results-risk" id="results-risk">Risk level</div>
+                    <div class="results-stats" id="results-stats">--</div>
+                    <div class="results-target" id="results-target"></div>
+                </div>
+            </div>
+            <div id="results-note" class="results-note" style="display:none;"></div>
+            <div id="results-findings" class="results-findings"></div>
+            <div class="results-cta">
+                <a class="free-path" href="https://github.com/SkintLabs/WonderwallAi">
+                    <strong>Fix it yourself with the free SDK</strong>
+                    <span>pip install wonderwallai. MIT-licensed, runs locally, all 4 layers included.</span>
+                </a>
+                <a class="pro-path" href="#pricing">
+                    <strong>Upgrade to Pro for fixes + monitoring</strong>
+                    <span>AI-generated fix code, hourly continuous scans, full attack library, compliance PDF.</span>
+                </a>
+            </div>
         </div>
-        <div style="margin-top: 28px; display: flex; justify-content: center; align-items: center; gap: 16px; flex-wrap: wrap;">
+
+        <div style="margin-top: 36px; display: flex; justify-content: center; align-items: center; gap: 16px; flex-wrap: wrap;">
             <a href="https://www.producthunt.com/products/wonderwallai?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-wonderwallai" target="_blank" rel="noopener noreferrer">
                 <img alt="WonderwallAi - Your LLM's last line of defence against the internet. | Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1136246&amp;theme=light&amp;t=1777580823382">
             </a>
@@ -1167,8 +1323,8 @@ wall = Wonderwall(
 <section id="pricing" class="section" style="background: var(--bg-subtle); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
     <div class="container">
         <div class="section-label fade-in">Pricing</div>
-        <h2 class="section-title fade-in">Simple, Transparent Pricing</h2>
-        <p class="section-subtitle fade-in">Open-source SDK is free forever. Hosted API scales with you.</p>
+        <h2 class="section-title fade-in">Find the holes. Patch them. Sleep at night.</h2>
+        <p class="section-subtitle fade-in">The SDK is free and open source. Pro is what stops you getting paged at 3 a.m.</p>
 
         <!-- Early Bird Banner (hidden by default — shown via JS when promotion is active) -->
         <div id="early-bird-banner" class="early-bird-banner fade-in" style="display: none;">
@@ -1187,59 +1343,64 @@ wall = Wonderwall(
 
         <div class="pricing-grid fade-in">
             <div class="price-card">
-                <h3>Free</h3>
+                <h3>Free SDK</h3>
                 <div class="price-amount">$0<span>/mo</span></div>
-                <div class="price-desc">For testing and side projects</div>
+                <div class="price-desc">Build it yourself</div>
                 <ul class="price-features">
-                    <li>1,000 scans/month</li>
-                    <li>10 requests/minute</li>
+                    <li>Open-source SDK, MIT licensed</li>
                     <li>All 4 protection layers</li>
+                    <li>Runs locally, zero external calls</li>
+                    <li>3 free scanner runs/hour from this page</li>
                     <li>Community support</li>
                 </ul>
-                <a href="https://github.com/SkintLabs/WonderwallAi" class="btn btn-outline">Get Started Free</a>
+                <a href="https://github.com/SkintLabs/WonderwallAi" class="btn btn-outline">Get the SDK</a>
             </div>
             <div class="price-card" data-plan="starter">
                 <span class="eb-badge">50% OFF</span>
                 <h3>Starter</h3>
+                <div class="price-desc">Confirm your LLM is safe</div>
                 <div class="price-original">$19/mo</div>
                 <div class="price-amount"><span class="price-full">$19</span><span class="price-discounted">$9.50</span><span>/mo</span></div>
-                <div class="price-desc">For growing applications</div>
                 <ul class="price-features">
-                    <li>50,000 scans/month</li>
-                    <li>60 requests/minute</li>
-                    <li>Overage: $0.0006/scan</li>
+                    <li>Hosted API, 50,000 scans/month</li>
+                    <li>5 scanner runs/day on your live app</li>
+                    <li>60 req/min</li>
                     <li>Email support</li>
                 </ul>
-                <a href="https://wonderwallai-production.up.railway.app/v1/billing/checkout?plan=starter" class="btn btn-outline">Get Started</a>
+                <a href="https://wonderwallai-production.up.railway.app/v1/billing/checkout?plan=starter" class="btn btn-outline">Start Starter</a>
             </div>
             <div class="price-card popular" data-plan="pro">
                 <span class="eb-badge">50% OFF</span>
-                <div class="popular-badge">Most Popular</div>
+                <div class="popular-badge">Sleep at night</div>
                 <h3>Pro</h3>
+                <div class="price-desc">Production-grade defence</div>
                 <div class="price-original">$99/mo</div>
                 <div class="price-amount"><span class="price-full">$99</span><span class="price-discounted">$49.50</span><span>/mo</span></div>
-                <div class="price-desc">For production workloads</div>
                 <ul class="price-features">
-                    <li>500,000 scans/month</li>
-                    <li>200 requests/minute</li>
-                    <li>Overage: $0.0003/scan</li>
+                    <li>Everything in Starter, plus:</li>
+                    <li><strong>AI-generated fix code</strong> for every vulnerability</li>
+                    <li><strong>Continuous monitoring</strong> of your live LLM, hourly scans + alerts</li>
+                    <li><strong>Full 1,000+ attack library</strong> (vs. 20 in Starter)</li>
+                    <li><strong>Compliance PDF</strong> with OWASP LLM Top 10 mapping</li>
+                    <li>500,000 scans/month, 200 req/min</li>
                     <li>Priority support</li>
                 </ul>
-                <a href="https://wonderwallai-production.up.railway.app/v1/billing/checkout?plan=pro" class="btn btn-primary">Get Started</a>
+                <a href="https://wonderwallai-production.up.railway.app/v1/billing/checkout?plan=pro" class="btn btn-primary">Upgrade to Pro</a>
             </div>
             <div class="price-card" data-plan="business">
                 <span class="eb-badge">50% OFF</span>
                 <h3>Business</h3>
+                <div class="price-desc">High-volume, regulated</div>
                 <div class="price-original">$249/mo</div>
                 <div class="price-amount"><span class="price-full">$249</span><span class="price-discounted">$124.50</span><span>/mo</span></div>
-                <div class="price-desc">For high-volume apps</div>
                 <ul class="price-features">
-                    <li>2,000,000 scans/month</li>
-                    <li>500 requests/minute</li>
-                    <li>Overage: $0.0002/scan</li>
-                    <li>Dedicated support + SLA</li>
+                    <li>Everything in Pro, plus:</li>
+                    <li>2,000,000 scans/month, 500 req/min</li>
+                    <li>Custom attack library uploads</li>
+                    <li>Dedicated Slack channel</li>
+                    <li>SLA + dedicated support</li>
                 </ul>
-                <a href="https://wonderwallai-production.up.railway.app/v1/billing/checkout?plan=business" class="btn btn-outline">Get Started</a>
+                <a href="https://wonderwallai-production.up.railway.app/v1/billing/checkout?plan=business" class="btn btn-outline">Go Business</a>
             </div>
         </div>
         <p style="text-align: center; color: var(--text-muted); margin-top: 36px; font-size: 0.9rem;">
@@ -1415,6 +1576,211 @@ document.querySelectorAll('.faq-question').forEach(btn => {
         card.querySelector('.price-original').style.display = 'block';
         card.querySelector('.price-full').style.display = 'none';
         card.querySelector('.price-discounted').style.display = 'inline';
+    });
+})();
+
+// ============================================================
+// LIVE SCANNER
+// Wires the hero scanner to the WonderwallAi demo API.
+// ============================================================
+(function () {
+    const API_BASE = 'https://wonderwallai-production.up.railway.app';
+
+    const tabs = document.querySelectorAll('.scanner-tab');
+    const panes = document.querySelectorAll('.scanner-pane');
+    const goBtn = document.getElementById('scan-go');
+    const scanLabel = goBtn ? goBtn.querySelector('.scan-label') : null;
+    const errorBox = document.getElementById('scan-error');
+    const results = document.getElementById('results');
+    const resultsScore = document.getElementById('results-score');
+    const resultsRisk = document.getElementById('results-risk');
+    const resultsStats = document.getElementById('results-stats');
+    const resultsTarget = document.getElementById('results-target');
+    const resultsNote = document.getElementById('results-note');
+    const resultsFindings = document.getElementById('results-findings');
+
+    if (!goBtn) return;
+
+    let activeTab = 'url';
+
+    tabs.forEach(t => t.addEventListener('click', () => {
+        activeTab = t.dataset.tab;
+        tabs.forEach(x => {
+            const isActive = x === t;
+            x.classList.toggle('active', isActive);
+            x.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+        panes.forEach(p => p.hidden = (p.dataset.pane !== activeTab));
+        scanLabel.textContent = activeTab === 'url'
+            ? 'Scan for Vulnerabilities'
+            : 'Analyse Prompt';
+    }));
+
+    function showError(msg) {
+        errorBox.textContent = msg;
+        errorBox.classList.add('show');
+    }
+    function clearError() {
+        errorBox.classList.remove('show');
+        errorBox.textContent = '';
+    }
+
+    function setLoading(on) {
+        goBtn.classList.toggle('loading', on);
+        goBtn.disabled = on;
+        if (on) scanLabel.textContent = activeTab === 'url' ? 'Probing your LLM...' : 'Analysing prompt...';
+        else scanLabel.textContent = activeTab === 'url' ? 'Scan for Vulnerabilities' : 'Analyse Prompt';
+    }
+
+    function riskColour(score) {
+        if (score >= 90) return '#34d399';
+        if (score >= 75) return '#a3d977';
+        if (score >= 50) return '#ffe170';
+        if (score >= 25) return '#ffa085';
+        return '#ff8a8f';
+    }
+
+    function renderResults(data) {
+        // Headline
+        resultsScore.innerHTML = data.score + '<span class="of">/100</span>';
+        resultsScore.style.color = riskColour(data.score);
+        resultsRisk.textContent = data.risk_level;
+        resultsRisk.style.color = riskColour(data.score);
+        resultsStats.innerHTML =
+            'Ran <strong>' + data.attacks_run + '</strong> attacks. ' +
+            '<span class="bad">' + data.attacks_succeeded + ' got through</span>, ' +
+            '<span class="ok">' + data.attacks_blocked + ' blocked</span>. ' +
+            'Took ' + (data.duration_ms / 1000).toFixed(1) + 's.';
+        resultsTarget.textContent = data.target === 'system_prompt'
+            ? 'Static analysis of your system prompt'
+            : 'Target: ' + data.target;
+
+        if (data.note) {
+            resultsNote.textContent = data.note;
+            resultsNote.style.display = 'block';
+        } else {
+            resultsNote.style.display = 'none';
+        }
+
+        // Findings — sort by severity, vulnerable first
+        const order = { critical: 0, high: 1, medium: 2, low: 3 };
+        const sorted = data.findings.slice().sort((a, b) => {
+            if (a.succeeded !== b.succeeded) return a.succeeded ? -1 : 1;
+            return (order[a.severity] || 9) - (order[b.severity] || 9);
+        });
+
+        const sevPill = { critical: ['crit', 'Critical'], high: ['high', 'High'], medium: ['med', 'Medium'], low: ['med', 'Low'] };
+        const html = sorted.map(f => {
+            const [pillCls, pillTxt] = f.succeeded
+                ? (sevPill[f.severity] || ['med', f.severity])
+                : ['ok', 'Blocked'];
+            const icon = f.succeeded
+                ? (f.severity === 'critical' ? '🔴' : f.severity === 'high' ? '🟠' : '🟡')
+                : '🟢';
+            const escape = (s) => (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return (
+                '<details class="finding" data-severity="' + f.severity + '" data-succeeded="' + f.succeeded + '">' +
+                '<summary>' +
+                '<span class="finding-icon">' + icon + '</span>' +
+                '<span class="finding-title">' + escape(f.title) + '</span>' +
+                '<span class="finding-pill ' + pillCls + '">' + pillTxt + '</span>' +
+                '</summary>' +
+                '<div class="finding-body">' +
+                '<p>' + escape(f.why_it_matters) + '</p>' +
+                (f.payload ? '<h4>Attack payload</h4><pre>' + escape(f.payload) + '</pre>' : '') +
+                (f.response_excerpt ? '<h4>What your bot returned</h4><pre>' + escape(f.response_excerpt) + '</pre>' : '') +
+                (f.error ? '<h4>Note</h4><pre>Could not complete this check: ' + escape(f.error) + '</pre>' : '') +
+                '</div>' +
+                '</details>'
+            );
+        }).join('');
+        resultsFindings.innerHTML = html;
+
+        results.classList.add('show');
+        // Scroll into view
+        setTimeout(() => results.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+    }
+
+    async function postJson(path, body) {
+        const res = await fetch(API_BASE + path, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+        });
+        const text = await res.text();
+        let data = null;
+        try { data = text ? JSON.parse(text) : null; } catch (_) { data = null; }
+        if (!res.ok) {
+            const msg = (data && (data.detail || data.message)) || ('Scan failed (' + res.status + ').');
+            throw new Error(msg);
+        }
+        return data;
+    }
+
+    async function runUrlScan() {
+        const url = (document.getElementById('scan-url-input').value || '').trim();
+        if (!url) { showError('Enter the URL of your AI app to scan.'); return; }
+        if (!/^https?:\/\//i.test(url)) { showError('URL must start with http:// or https://'); return; }
+
+        const advancedOpen = document.querySelector('.scanner-advanced[open]');
+        let endpoint_shape = null;
+        if (advancedOpen) {
+            try {
+                const headersText = (document.getElementById('adv-headers').value || '').trim();
+                const bodyText = (document.getElementById('adv-body').value || '').trim();
+                endpoint_shape = {
+                    method: (document.getElementById('adv-method').value || 'POST').trim(),
+                    path: (document.getElementById('adv-path').value || '/api/chat').trim(),
+                    body_template: bodyText ? JSON.parse(bodyText) : { message: '{{message}}' },
+                    headers: headersText ? JSON.parse(headersText) : null,
+                };
+            } catch (e) {
+                showError('Advanced options have invalid JSON. Check the body and headers fields.');
+                return;
+            }
+        }
+
+        clearError();
+        setLoading(true);
+        try {
+            const data = await postJson('/v1/demo/scan-url', { url, endpoint_shape });
+            renderResults(data);
+        } catch (err) {
+            showError(err.message || 'Something went wrong. Try again or use the prompt tab.');
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    async function runPromptScan() {
+        const prompt = (document.getElementById('scan-prompt-input').value || '').trim();
+        if (!prompt) { showError('Paste a system prompt to analyse.'); return; }
+        if (prompt.length < 10) { showError('That prompt is too short to analyse meaningfully.'); return; }
+
+        clearError();
+        setLoading(true);
+        try {
+            const data = await postJson('/v1/demo/scan-prompt', { system_prompt: prompt });
+            renderResults(data);
+        } catch (err) {
+            showError(err.message || 'Something went wrong. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    goBtn.addEventListener('click', () => {
+        if (activeTab === 'url') runUrlScan();
+        else runPromptScan();
+    });
+
+    // Enter-to-submit on URL field
+    const urlInput = document.getElementById('scan-url-input');
+    if (urlInput) urlInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey && activeTab === 'url') {
+            e.preventDefault();
+            runUrlScan();
+        }
     });
 })();
 </script>
