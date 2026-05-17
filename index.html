@@ -610,12 +610,14 @@
 
         /* ---- EARLY BIRD ---- */
         .early-bird-banner {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(38, 70, 83, 0.08));
+            background: transparent;
             border: 1px solid var(--green);
             border-radius: 16px;
             padding: 20px 28px;
             margin-bottom: 32px;
         }
+        .early-bird-counter { background: transparent !important; }
+        .early-bird-count { background: transparent !important; }
         .early-bird-inner {
             display: flex;
             align-items: center;
@@ -796,33 +798,14 @@
     </div>
 </nav>
 
-<!-- PRODUCT HUNT BANNER — sits below nav, scrolls away with the page -->
-<div id="ph-banner" style="background: linear-gradient(90deg, #da552f 0%, #e8714a 100%); color: #fff; text-align: center; padding: 12px 20px; font-size: 0.9rem; position: relative; z-index: 99; margin-top: 64px;">
-    <span style="margin-right: 10px;">🚀</span>
-    <strong>Product Hunt Launch Week Special</strong>. Get <strong>75% off forever</strong>. Use code <strong style="background:rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 4px; letter-spacing:0.05em;">PRODUCTHUNT</strong> at checkout.
+<!-- EARLY BIRD BANNER — sits below nav, sticky at top of page -->
+<div id="eb-banner" style="background: linear-gradient(90deg, #2a9d8f 0%, #264653 100%); color: #fff; text-align: center; padding: 12px 20px; font-size: 0.9rem; position: relative; z-index: 99; margin-top: 64px;">
+    <span style="margin-right: 10px;">⚡</span>
+    <strong>Early Bird: 50% off forever</strong>. Use code <strong style="background:rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 4px; letter-spacing:0.05em;">EARLYBIRD50</strong> at checkout. Limited to the first 300 paying customers.
     <span style="margin: 0 10px; opacity: 0.6;">|</span>
-    <span id="ph-countdown" style="font-weight:700;"></span>
-    <span style="margin: 0 10px; opacity: 0.6;">|</span>
-    <a href="#pricing" style="color:#fff; text-decoration: underline; font-weight:700;">Grab the deal →</a>
-    <button onclick="document.getElementById('ph-banner').style.display='none'" style="background:none;border:none;color:#fff;opacity:0.7;cursor:pointer;position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:1.2rem;line-height:1;">×</button>
+    <a href="#pricing" style="color:#fff; text-decoration: underline; font-weight:700;">Lock in your price →</a>
+    <button onclick="document.getElementById('eb-banner').style.display='none'" style="background:none;border:none;color:#fff;opacity:0.7;cursor:pointer;position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:1.2rem;line-height:1;">×</button>
 </div>
-<script>
-(function() {
-    var deadline = new Date('2026-05-04T23:59:59+10:00');
-    function tick() {
-        var now = new Date();
-        var diff = deadline - now;
-        if (diff <= 0) { document.getElementById('ph-banner').style.display='none'; return; }
-        var d = Math.floor(diff/86400000);
-        var h = Math.floor((diff%86400000)/3600000);
-        var m = Math.floor((diff%3600000)/60000);
-        var s = Math.floor((diff%60000)/1000);
-        var el = document.getElementById('ph-countdown');
-        if (el) el.textContent = 'Ends in ' + (d>0?d+'d ':'')+h+'h '+m+'m '+s+'s';
-    }
-    tick(); setInterval(tick, 1000);
-})();
-</script>
 
 
 <!-- SCANNER HERO STYLES -->
@@ -918,6 +901,9 @@
 .locked-overlay .lock-cta { display: inline-block; background: var(--accent); color: white; padding: 12px 26px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; box-shadow: 0 0 24px var(--accent-glow); transition: all 0.15s; }
 .locked-overlay .lock-cta:hover { background: var(--accent-hover); transform: translateY(-1px); }
 .locked-overlay .lock-fineprint { color: var(--text-muted); font-size: 0.78rem; }
+
+/* COMING-SOON PILL on Pro features still rolling out */
+.soon { display: inline-block; margin-left: 6px; padding: 1px 7px; font-size: 0.65rem; letter-spacing: 0.06em; text-transform: uppercase; background: rgba(255, 210, 0, 0.16); color: #ffe170; border-radius: 4px; vertical-align: middle; font-weight: 600; }
 
 /* SHARE LINK BAR */
 .share-bar { display: none; margin-top: 22px; padding: 12px 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; align-items: center; gap: 12px; flex-wrap: wrap; }
@@ -1015,15 +1001,15 @@
             <div id="results-findings" class="results-findings">
                 <div class="locked-overlay">
                     <div class="lock-h">Unlock the rest with <span class="ww">Wonderwall<span class="a">A</span><span style="-webkit-text-fill-color:#e9c46a;font-family:'Kenjaku',sans-serif">i</span></span> Pro</div>
-                    <div class="lock-sub" id="locked-overlay-sub">Sign up to see all findings, the actual responses your bot gave, and the one-click AI fix code that hardens your LLM in under 60 seconds.</div>
-                    <a class="lock-cta" href="#pricing">Unlock for $2 first month</a>
-                    <div class="lock-fineprint">$19/mo after. Cancel anytime.</div>
+                    <div class="lock-sub" id="locked-overlay-sub">Sign up to see all 20 findings, the actual responses your bot gave, and the severity breakdown for each one.</div>
+                    <a class="lock-cta" href="#pricing">Start 14-day free trial</a>
+                    <div class="lock-fineprint">$19/mo after. Cancel anytime. 50% off forever with EARLYBIRD50.</div>
                 </div>
             </div>
             <div class="results-cta">
                 <a class="pro-path" href="#pricing" style="grid-column: 1 / -1;">
-                    <strong>Fix all of this in one click. $2 for your first month.</strong>
-                    <span>AI-generated hardened prompt + drop-in firewall code, continuous monitoring, full attack library. $19/mo after. Cancel anytime.</span>
+                    <strong>See every hole. Patch your LLM in minutes.</strong>
+                    <span>All 20 findings with full payloads and bot responses. 500,000 hosted firewall scans/mo. Email support. 14-day free trial, $19/mo after, cancel anytime.</span>
                 </a>
             </div>
             <div style="text-align: center; margin-top: 14px; color: var(--text-muted); font-size: 0.86rem;">
@@ -1508,7 +1494,7 @@ wall = Wonderwall(
             </div>
         </div>
 
-        <div class="pricing-grid fade-in" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="pricing-grid fade-in" style="grid-template-columns: repeat(2, 1fr); max-width: 880px; margin-left: auto; margin-right: auto;">
             <div class="price-card">
                 <h3>Free</h3>
                 <div class="price-desc">See where you stand</div>
@@ -1523,43 +1509,26 @@ wall = Wonderwall(
                 <a href="#hero-section" class="btn btn-outline">Run a Free Scan</a>
             </div>
             <div class="price-card popular" data-plan="pro">
-                <span class="eb-badge">$2 first month</span>
-                <div class="popular-badge">Sleep at night</div>
+                <span class="eb-badge">50% off forever</span>
+                <div class="popular-badge">Most popular</div>
                 <h3>Pro</h3>
                 <div class="price-desc">Production-grade defence</div>
-                <div class="price-original">then $19/mo</div>
-                <div class="price-amount"><span class="price-discounted">$2</span><span>first month</span></div>
+                <div class="price-trial-line" style="font-size: 0.9rem; color: var(--accent-hover); margin-bottom: 4px; letter-spacing: 0.04em; text-transform: uppercase; font-weight: 700;">14-day free trial</div>
+                <div class="price-amount"><span class="price-full">$19</span><span class="price-discounted">$9.50</span><span>/mo</span></div>
                 <ul class="price-features">
                     <li>Everything in Free, fully unlocked</li>
-                    <li><strong>One-click AI fix code</strong> for every vulnerability</li>
-                    <li><strong>Continuous monitoring</strong>, hourly scans + email/Slack alerts</li>
-                    <li><strong>Full 1,000+ attack library</strong></li>
-                    <li><strong>Compliance PDF</strong> with OWASP LLM Top 10 mapping</li>
+                    <li>All 20 findings revealed, full payloads</li>
+                    <li>Bot's actual response shown per finding</li>
+                    <li>Severity breakdown (high / medium / low)</li>
                     <li>500,000 hosted firewall scans/month</li>
-                    <li>Priority support</li>
+                    <li>Email support</li>
                 </ul>
-                <a href="https://wonderwallai-production.up.railway.app/v1/billing/checkout?plan=pro" class="btn btn-primary">Start Pro for $2</a>
-                <div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; margin-top: 8px;">$19/mo after the first month. Cancel anytime.</div>
-            </div>
-            <div class="price-card" data-plan="business">
-                <span class="eb-badge">$2 first month</span>
-                <h3>Business</h3>
-                <div class="price-desc">High-volume + regulated</div>
-                <div class="price-original">then $89/mo</div>
-                <div class="price-amount"><span class="price-discounted">$2</span><span>first month</span></div>
-                <ul class="price-features">
-                    <li>Everything in Pro, plus:</li>
-                    <li>2,000,000 hosted firewall scans/month</li>
-                    <li>Custom attack library uploads</li>
-                    <li>Dedicated Slack channel</li>
-                    <li>SLA + dedicated support</li>
-                </ul>
-                <a href="https://wonderwallai-production.up.railway.app/v1/billing/checkout?plan=business" class="btn btn-outline">Start Business for $2</a>
-                <div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; margin-top: 8px;">$89/mo after the first month. Cancel anytime.</div>
+                <a href="https://wonderwallai-production.up.railway.app/v1/billing/checkout?plan=pro" class="btn btn-primary">Start 14-day free trial</a>
+                <div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; margin-top: 8px;">$19/mo after the trial. Cancel anytime. Use EARLYBIRD50 at checkout for 50% off forever.</div>
             </div>
         </div>
         <p style="text-align: center; color: var(--text-muted); margin-top: 36px; font-size: 0.9rem;">
-            Need more? <a href="mailto:support@skintlabs.ai?subject=Enterprise">Enterprise plans</a> with unlimited scans, custom rate limits, and SLA guarantees.
+            Need 2M+ scans, custom integrations, an SLA, or a compliance review? <a href="mailto:support@skintlabs.ai?subject=Enterprise%20enquiry">Email us for an enterprise quote</a>.
         </p>
     </div>
 </section>
@@ -1727,10 +1696,12 @@ document.querySelectorAll('.faq-question').forEach(btn => {
     if (counter) counter.textContent = data.remaining_spots;
 
     document.querySelectorAll('.price-card[data-plan]').forEach(card => {
-        card.querySelector('.eb-badge').style.display = 'block';
-        card.querySelector('.price-original').style.display = 'block';
-        card.querySelector('.price-full').style.display = 'none';
-        card.querySelector('.price-discounted').style.display = 'inline';
+        const badge = card.querySelector('.eb-badge');
+        if (badge) badge.style.display = 'block';
+        const full = card.querySelector('.price-full');
+        if (full) full.style.display = 'none';
+        const discounted = card.querySelector('.price-discounted');
+        if (discounted) discounted.style.display = 'inline';
     });
 })();
 
@@ -1801,14 +1772,24 @@ document.querySelectorAll('.faq-question').forEach(btn => {
         resultsScore.style.color = riskColour(data.score);
         resultsRisk.textContent = data.risk_level;
         resultsRisk.style.color = riskColour(data.score);
-        resultsStats.innerHTML =
-            'Ran <strong>' + data.attacks_run + '</strong> attacks. ' +
-            '<span class="bad">' + data.attacks_succeeded + ' got through</span>, ' +
-            '<span class="ok">' + data.attacks_blocked + ' blocked</span>. ' +
-            'Took ' + (data.duration_ms / 1000).toFixed(1) + 's.';
+        // Site-recon mode = "we couldn't find a chatbot, here's a site security scan instead"
+        const isRecon = data.mode === 'site_recon';
+        if (isRecon) {
+            resultsStats.innerHTML =
+                'No AI chatbot detected. Ran <strong>' + data.attacks_run + '</strong> ' +
+                'site-security checks. <span class="bad">' + data.attacks_succeeded + ' issues</span>, ' +
+                '<span class="ok">' + data.attacks_blocked + ' clean</span>. ' +
+                'Took ' + (data.duration_ms / 1000).toFixed(1) + 's.';
+        } else {
+            resultsStats.innerHTML =
+                'Ran <strong>' + data.attacks_run + '</strong> attacks. ' +
+                '<span class="bad">' + data.attacks_succeeded + ' got through</span>, ' +
+                '<span class="ok">' + data.attacks_blocked + ' blocked</span>. ' +
+                'Took ' + (data.duration_ms / 1000).toFixed(1) + 's.';
+        }
         resultsTarget.textContent = data.target === 'system_prompt'
             ? 'Static analysis of your system prompt'
-            : 'Target: ' + data.target;
+            : (isRecon ? 'Site recon: ' : 'Target: ') + data.target;
 
         if (data.note) {
             resultsNote.textContent = data.note;
@@ -1869,16 +1850,17 @@ document.querySelectorAll('.faq-question').forEach(btn => {
             resultsFindings.classList.remove('has-lock');
         }
 
-        // Show share-link bar (mock URL until backend persists scans; based on a deterministic hash of target+score so it feels real)
+        // Show share-link bar. Backend returns a real scan_id we persist for 7 days.
         try {
-            const targetSeed = (data.target || 'scan') + ':' + data.score + ':' + data.attacks_succeeded;
-            const id = btoa(unescape(encodeURIComponent(targetSeed))).replace(/[^a-zA-Z0-9]/g, '').slice(0, 10);
-            const shareUrl = window.location.origin + '/scan/' + id;
-            const shareBar = document.getElementById('share-bar');
-            const shareInput = document.getElementById('share-url');
-            if (shareBar && shareInput) {
-                shareInput.value = shareUrl;
-                shareBar.classList.add('show');
+            const id = data.scan_id;
+            if (id) {
+                const shareUrl = window.location.origin + window.location.pathname.replace(/\/+$/, '/') + '?scan=' + encodeURIComponent(id);
+                const shareBar = document.getElementById('share-bar');
+                const shareInput = document.getElementById('share-url');
+                if (shareBar && shareInput) {
+                    shareInput.value = shareUrl;
+                    shareBar.classList.add('show');
+                }
             }
         } catch (_) { /* no-op */ }
 
@@ -1984,6 +1966,26 @@ document.querySelectorAll('.faq-question').forEach(btn => {
             runUrlScan();
         }
     });
+
+    // If the page was opened with ?scan=id, fetch and render that stored scan.
+    // Anonymous viewers always see the locked/free-limited view; that's enforced
+    // client-side by FREE_VISIBLE in renderResults.
+    (async function loadSharedScan() {
+        const params = new URLSearchParams(window.location.search);
+        const sid = params.get('scan');
+        if (!sid) return;
+        try {
+            setLoading(true);
+            const res = await fetch(API_BASE + '/v1/demo/scan/' + encodeURIComponent(sid));
+            if (!res.ok) {
+                if (res.status === 404) showError('That scan link has expired. Run a new scan to share fresh results.');
+                return;
+            }
+            const data = await res.json();
+            renderResults(data);
+        } catch (_) { /* no-op */ }
+        finally { setLoading(false); }
+    })();
 })();
 </script>
 
