@@ -1514,7 +1514,8 @@ wall = Wonderwall(
                 <h3>Pro</h3>
                 <div class="price-desc">Production-grade defence</div>
                 <div class="price-trial-line" style="font-size: 0.9rem; color: var(--accent-hover); margin-bottom: 4px; letter-spacing: 0.04em; text-transform: uppercase; font-weight: 700;">14-day free trial</div>
-                <div class="price-amount"><span class="price-full">$19</span><span class="price-discounted">$9.50</span><span>/mo</span></div>
+                <div class="price-amount">$19<span>/mo</span></div>
+                <div class="price-eb-hint" style="font-size: 0.85rem; color: var(--green); margin-top: -8px; margin-bottom: 12px; font-weight: 600;">50% off forever with <span style="font-family: 'JetBrains Mono', monospace; background: rgba(42,157,143,0.12); padding: 1px 6px; border-radius: 3px;">EARLYBIRD50</span> → $9.50/mo</div>
                 <ul class="price-features">
                     <li>Everything in Free, fully unlocked</li>
                     <li>All 20 findings revealed, full payloads</li>
@@ -1698,10 +1699,6 @@ document.querySelectorAll('.faq-question').forEach(btn => {
     document.querySelectorAll('.price-card[data-plan]').forEach(card => {
         const badge = card.querySelector('.eb-badge');
         if (badge) badge.style.display = 'block';
-        const full = card.querySelector('.price-full');
-        if (full) full.style.display = 'none';
-        const discounted = card.querySelector('.price-discounted');
-        if (discounted) discounted.style.display = 'inline';
     });
 })();
 
